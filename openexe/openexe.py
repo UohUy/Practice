@@ -1,4 +1,3 @@
 # coding = utf-8
-
-import sys
-print(sys.getwindowsversion())
+current_line = [1]
+next_line = []
