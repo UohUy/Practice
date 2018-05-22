@@ -59,10 +59,12 @@ class Task2:
         else:
             self.p = 1 / (1 + exp(diff / t))
 
-    def get_2a_result(self):
+    def get_2a_result(self, u=random_variable()):
         i = 0
         start = time.clock()
+        self.result = self.func_2a(u)
         while self.t > self.t_min:
+            print("T, u and z:", self.t, u, self.result)
             i += 1
             x = self.random_x()
             u = self.random_variable()
@@ -74,15 +76,16 @@ class Task2:
                 if 0 <= x <= self.p:
                     self.result = current_result
             self.t = self.t * (1 - delta)
-            # print("T, u and z:", self.t, u, current_result)
         end = time.clock()
         print("Final result is:", self.result)
         print('%d times simulation. Cost %f second' % (i, (end - start)))
 
-    def get_2b_result(self):
+    def get_2b_result(self, u=random_variable(), v=random_variable()):
         i = 0
         start = time.clock()
+        self.result = self.func_2b(u, v)
         while self.t > self.t_min:
+            print("T, u, v and z:", self.t, u, v, self.result)
             i += 1
             x = self.random_x()
             u = self.random_variable()
@@ -95,15 +98,16 @@ class Task2:
                 if 0 <= x <= self.p:
                     self.result = current_result
             self.t = self.t * (1 - delta)
-            # print("T, u, v and z:", self.t, u, v, current_result)
         end = time.clock()
         print("Final result is:", self.result)
         print(i, "times simulation. Cost %f second" % (end - start))
 
-    def get_2c_result(self):
+    def get_2c_result(self, u=random_variable(), v=random_variable(), w=random_variable()):
         i = 0
         start = time.clock()
+        self.result = self.func_2c(u, v, w)
         while self.t > self.t_min:
+            print("T, u, v, w and z:", self.t, u, v, w, self.result)
             i += 1
             u = self.random_variable()
             v = self.random_variable()
@@ -117,15 +121,16 @@ class Task2:
                 if 0 <= x <= self.p:
                     self.result = current_result
             self.t = self.t * (1 - delta)
-            # print("T, u, v, w and z:", self.t, u, v, w, current_result)
         end = time.clock()
         print("Final result is:", self.result)
         print('%d times simulation. Cost %f second' % (i, (end - start)))
 
-    def get_2d_result(self):
+    def get_2d_result(self, u=random_variable(), v=random_variable(), w=random_variable(), y=random_y()):
         i = 0
         start = time.clock()
+        self.result = self.func_2d(u, v, w, y)
         while self.t > self.t_min:
+            print("T, u, v ,w and z:", self.t, u, v, w, self.result)
             i += 1
             u = self.random_variable()
             v = self.random_variable()
@@ -140,12 +145,88 @@ class Task2:
                 if 0 <= x <= self.p:
                     self.result = current_result
             self.t = self.t * (1 - delta)
-            # print("T, u, v ,w and z:", self.t, u, v, w, current_result)
         end = time.clock()
         print("Final result is:", self.result)
         print('%d times simulation. Cost %f second' % (i, (end - start)))
-        # TODO add y
 
+
+def display_2a_menu():
+    while True:
+        print("---------2a---------")
+        print("1. Variables start as 0")
+        print("2. Variables start randomly")
+        print("3. Input variables")
+        print("4. Go back to previous page")
+        task2 = Task2()
+        choice = input()
+        if choice == '1':
+            task2.get_2a_result(0)
+        if choice == '2':
+            task2.get_2a_result()
+        if choice == '3':
+            print('Please input u: ')
+            u = input()
+            task2.get_2a_result(u)
+
+
+def display_2b_menu():
+    while True:
+        print("---------2a---------")
+        print("1. Variables start as 0")
+        print("2. Variables start randomly")
+        print("3. Input variables")
+        print("4. Go back to previous page")
+        task2 = Task2()
+        choice = input()
+        if choice == '1':
+            task2.get_2b_result(0, 0)
+        if choice == '2':
+            task2.get_2b_result()
+        if choice == '3':
+            print('Please input u, v: ')
+            variables = input()
+            u, v = variables.split(',')
+            task2.get_2b_result(u, v)
+
+
+def display_2c_menu():
+    while True:
+        print("---------2a---------")
+        print("1. Variables start as 0")
+        print("2. Variables start randomly")
+        print("3. Input variables")
+        print("4. Go back to previous page")
+        task2 = Task2()
+        choice = input()
+        if choice == '1':
+            task2.get_2c_result(0, 0, 0)
+        if choice == '2':
+            task2.get_2c_result()
+        if choice == '3':
+            print('Please input u, v, w: ')
+            variables = input()
+            u, v, w = variables.split(',')
+            task2.get_2c_result(u, v, w)
+
+
+def display_2d_menu():
+    while True:
+        print("---------2a---------")
+        print("1. Variables start as 0")
+        print("2. Variables start randomly")
+        print("3. Input variables")
+        print("4. Go back to previous page")
+        task2 = Task2()
+        choice = input()
+        if choice == '1':
+            task2.get_2d_result(0, 0, 0, 0)
+        if choice == '2':
+            task2.get_2d_result()
+        if choice == '3':
+            print('Please input u, v, w: ')
+            variables = input()
+            u, v, w, y = variables.split(',')
+            task2.get_2d_result(u, v, w, y)
 
 def run():
     while True:
@@ -157,18 +238,16 @@ def run():
         print("5. Exit")
         print("Please input your choice:")
         choice = input()
-        task2 = Task2()
         if choice == '5':
             break
         elif choice == '1':
-            task2.get_2a_result()
+            display_2a_menu()
         elif choice == '2':
-            task2.get_2b_result()
+            display_2b_menu()
         elif choice == '3':
-            task2.get_2c_result()
+            display_2c_menu()
         elif choice == '4':
-            print()  # TODO Choose y
-            task2.get_2d_result()
+            display_2d_menu()
 
 
 if __name__ == '__main__':
